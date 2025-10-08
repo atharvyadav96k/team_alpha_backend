@@ -79,7 +79,7 @@ router.post("/points/:name", async (req, res) => {
   }
 
   try {
-    const dustbin = await Dustbin.findById({name: req.params.name});
+    const dustbin = await Dustbin.findOne({ name: req.params.name });
     if (!dustbin) return res.status(404).json({ message: "Dustbin not found" });
 
     dustbin.points += points;
@@ -92,5 +92,6 @@ router.post("/points/:name", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
 
 module.exports = router;
