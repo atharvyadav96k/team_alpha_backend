@@ -71,7 +71,7 @@ router.post("/update/:name", async (req, res) => {
 });
 
 // Add points only
-router.post("/points/:id", async (req, res) => {
+router.post("/points/:name", async (req, res) => {
   const { points } = req.body;
 
   if (typeof points !== "number") {
@@ -79,7 +79,7 @@ router.post("/points/:id", async (req, res) => {
   }
 
   try {
-    const dustbin = await Dustbin.findById(req.params.id);
+    const dustbin = await Dustbin.findById({name: req.params.name});
     if (!dustbin) return res.status(404).json({ message: "Dustbin not found" });
 
     dustbin.points += points;
